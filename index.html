@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبكة الممرضين السودانيين الدولية | Sudanese International Nursing Network</title>
+    <!-- Google Fonts: Tajawal & Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #030712;
+            --primary-blue: #0284c7;
+            --cyan-glow: #38bdf8;
+            --emerald-glow: #10b981;
+            --accent-green: #52c41a;
+            --glass-bg: rgba(15, 23, 42, 0.85);
+            --glass-border: rgba(56, 189, 248, 0.25);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Interactive Canvas Background */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Main Container */
+        .cyber-card {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 800px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 0 50px rgba(2, 132, 199, 0.25),
+                        inset 0 0 20px rgba(56, 189, 248, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Glowing Accent Line */
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cyan-glow), var(--emerald-glow), transparent);
+            animation: scanline 4s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Header Styling */
+        .header {
+            text-align: center;
+            padding: 45px 20px 25px;
+            position: relative;
+        }
+
+        .logo-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed var(--cyan-glow);
+            animation: spin 15s linear infinite;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #ffffff;
+            padding: 4px;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+            border: 2px solid var(--cyan-glow);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ffffff, var(--cyan-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header .en-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            color: var(--cyan-glow);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: var(--emerald-glow);
+            font-weight: 600;
+        }
+
+        .status-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--emerald-glow);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--emerald-glow);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Form Area */
+        .form-content {
+            padding: 20px 35px 40px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--cyan-glow);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 650px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-content { padding: 15px 20px 30px; }
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-box.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .input-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+        }
+
+        .input-box label i {
+            color: var(--cyan-glow);
+            margin-left: 6px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-field:focus {
+            border-color: var(--cyan-glow);
+            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+        }
+
+        select.input-field {
+            cursor: pointer;
+            color: #f8fafc;
+        }
+
+        select.input-field option {
+            background: #0f172a;
+            color: #fff;
+        }
+
+        /* Office / Department Selection Cards */
+        .office-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .office-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .office-card i {
+            font-size: 20px;
+            color: var(--cyan-glow);
+            width: 35px;
+            height: 35px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .office-card .office-info h4 {
+            font-size: 13px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .office-card .office-info p {
+            font-size: 11px;
+            color: var(--text-sub);
+        }
+
+        input[type="radio"] { display: none; }
+
+        input[type="radio"]:checked + .office-card {
+            border-color: var(--cyan-glow);
+            background: rgba(2, 132, 199, 0.2);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        input[type="radio"]:checked + .office-card i {
+            background: var(--cyan-glow);
+            color: #000;
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        /* Ultra Cyber Submit Button */
+        .cyber-btn {
+            position: relative;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #0284c7, #10b981);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .cyber-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(30deg);
+            transition: 0.8s;
+        }
+
+        .cyber-btn:hover::after {
+            left: 100%;
+        }
+
+        .cyber-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(16, 185, 129, 0.6);
+        }
+
+        .cyber-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--text-sub);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(3, 7, 18, 0.5);
+        }
+
+        .footer span {
+            color: var(--cyan-glow);
+            font-family: 'Orbitron', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Particles Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Main Content Card -->
+    <div class="cyber-card">
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-ring"></div>
+                <!-- Embedded SNN Logo -->
+                <svg class="logo-img" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0284c7" />
+                            <stop offset="100%" stop-color="#0f172a" />
+                        </linearGradient>
+                        <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#52c41a" />
+                            <stop offset="100%" stop-color="#15803d" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="#ffffff"/>
+                    <!-- Sudan Map Outline Background -->
+                    <path d="M 240 70 L 290 60 L 330 65 L 340 100 L 350 140 L 320 180 L 280 200 L 250 170 Z" fill="none" stroke="#22c55e" stroke-width="2" opacity="0.6"/>
+                    <!-- Pulse Line -->
+                    <path d="M 20 230 L 100 230 L 120 170 L 140 290 L 160 210 L 180 250 L 200 230 L 480 230" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                    <!-- S Curve -->
+                    <path d="M 180 140 C 100 160 90 280 180 280 C 230 280 220 380 110 380" fill="none" stroke="url(#greenGrad)" stroke-width="32" stroke-linecap="round"/>
+                    <!-- Stethoscope / N Shapes -->
+                    <path d="M 200 320 C 180 390 350 420 400 320 C 430 260 380 180 260 200 L 360 330 L 360 160" fill="none" stroke="url(#blueGrad)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Nurse Cap -->
+                    <path d="M 220 110 L 310 90 L 320 140 C 270 160 250 130 220 110 Z" fill="#ffffff" stroke="#0284c7" stroke-width="4"/>
+                    <path d="M 260 110 L 280 110 M 270 100 L 270 120" stroke="#0284c7" stroke-width="5" stroke-linecap="round"/>
+                    <!-- Stethoscope Head -->
+                    <circle cx="390" cy="330" r="22" fill="url(#blueGrad)" stroke="#ffffff" stroke-width="4"/>
+                    <circle cx="390" cy="330" r="12" fill="#e2e8f0"/>
+                </svg>
+            </div>
+            <h1>شبكة الممرضين السودانيين الدولية</h1>
+            <div class="en-title">Sudanese International Nursing Network</div>
+            <div class="status-badge">
+                <span class="pulse-dot"></span>
+                <span>الانطلاقة المحدثة والتسجيل المباشر</span>
+            </div>
+        </div>
+
+        <!-- Form Body -->
+        <div class="form-content">
+            <div class="section-title">
+                <i class="fa-solid fa-id-card-clip"></i>
+                <span>استمارة الانضمام والمراقبة الهيكلية</span>
+            </div>
+
+            <form id="networkForm">
+                <div class="form-grid">
+                    
+                    <!-- Full Name -->
+                    <div class="input-box">
+                        <label for="fullName"><i class="fa-solid fa-user-astronaut"></i> الاسم الرباعي الكامل:</label>
+                        <input type="text" id="fullName" class="input-field" placeholder="أدخل اسمك كما بالوثائق الرسمية" required>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="input-box">
+                        <label for="phone"><i class="fa-brands fa-whatsapp"></i> رقم الهاتف (الواتساب):</label>
+                        <input type="tel" id="phone" class="input-field" placeholder="09xxxxxxxx" required>
+                    </div>
+
+                    <!-- Academic / Professional Qualification -->
+                    <div class="input-box">
+                        <label for="qualification"><i class="fa-solid fa-user-graduate"></i> الدرجة العلمية / التخصص:</label>
+                        <select id="qualification" class="input-field" required>
+                            <option value="" disabled selected>اختر المؤهل العلمي...</option>
+                            <option value="بكالوريوس علوم التمريض">بكالوريوس علوم التمريض</option>
+                            <option value="دبلوم العالي في التمريض">دبلوم العالي في التمريض</option>
+                            <option value="ماجستير التمريض التخصصي">ماجستير التمريض التخصصي</option>
+                            <option value="دكتوراه / استشاري تمريض">دكتوراه / استشاري تمريض</option>
+                            <option value="أخصائي تمريض حالات حارجة / عمليات">أخصائي حالات حارجة / عمليات</option>
+                            <option value="طالب / امتياز تمريض">طالب / امتياز تمريض</option>
+                        </select>
+                    </div>
+
+                    <!-- Residence / Location -->
+                    <div class="input-box">
+                        <label for="location"><i class="fa-solid fa-earth-africa"></i> بلد ومدينة الإقامة الحالية:</label>
+                        <input type="text" id="location" class="input-field" placeholder="مثال: السودان - الخرطوم / قطر - الدوحة" required>
+                    </div>
+
+                    <!-- Weekly Dedicated Hours -->
+                    <div class="input-box full-width">
+                        <label for="availableHours"><i class="fa-solid fa-clock-rotate-left"></i> ساعات التفرغ والمشاركة الأسبوعية:</label>
+                        <select id="availableHours" class="input-field" required>
+                            <option value="" disabled selected>حدد الساعات المتاحة للدراسة والمراقبة...</option>
+                            <option value="من 1 إلى 3 ساعات أسبوعياً">من 1 إلى 3 ساعات أسبوعياً</option>
+                            <option value="من 4 إلى 7 ساعات أسبوعياً">من 4 إلى 7 ساعات أسبوعياً</option>
+                            <option value="أكثر من 8 ساعات (تفرغ كامل/فعال)">أكثر من 8 ساعات (تفرغ كامل/فعال)</option>
+                        </select>
+                    </div>
+
+                    <!-- Department / Office Selection -->
+                    <div class="input-box full-width">
+                        <label><i class="fa-solid fa-sitemap"></i> حدد المكتب / القسم الإداري المرغوب للانضمام له:</label>
+                        <div class="office-options">
+                            
+                            <label>
+                                <input type="radio" name="office" value="مكتب المراقبة والمتابعة التنظيمية" checked>
+                                <div class="office-card">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <div class="office-info">
+                                        <h4>المراقبة والتنظيم</h4>
+                                        <p>متابعة سير الأداء وضبط الجودة</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="مكتب الإعلام والعلاقات العامة">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                    <div class="office-info">
+                                        <h4>الإعلام والتواصل</h4>
+                                        <p>التغطية الإعلامية والنشر الدولي</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="أكاديمية التدريب والبحث العلمي">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-laptop-medical"></i>
+                                    <div class="office-info">
+                                        <h4>التدريب والتعليم</h4>
+                                        <p>تطوير الكوادر والورش العلمية</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="رابطة الطلاب والكوادر الحديثة">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-people-group"></i>
+                                    <div class="office-info">
+                                        <h4>رابطة الطلاب والشباب</h4>
+                                        <p>دعم الخريجين والكوادر الناشئة</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Additional Vision / Notes -->
+                    <div class="input-box full-width">
+                        <label for="notes"><i class="fa-solid fa-lightbulb"></i> رؤيتك أو مقترحاتك لتطوير الشبكة (اختياري):</label>
+                        <textarea id="notes" class="input-field" rows="3" placeholder="أكتب أفكارك ومقترحاتك لنكون أقوى معاً..."></textarea>
+                    </div>
+
+                </div>
+
+                <!-- Submit Button -->
+                <button type="button" onclick="submitToWhatsApp()" class="cyber-btn">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i>
+                    <span>إرسال البيانات فوراً إلى إدارة الشبكة</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>SINN</span> &copy; 2026 | Sudanese International Nursing Network - كافة الحقوق محفوظة
+        </div>
+    </div>
+
+    <!-- Background Particle Script & Logic -->
+    <script>
+        // --- Canvas Particle Animation ---
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(56, 189, 248, ${this.alpha})`;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#38bdf8';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 70; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 - dist / 800})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // --- WhatsApp Submission Logic ---
+        function submitToWhatsApp() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const qualification = document.getElementById('qualification').value;
+            const location = document.getElementById('location').value.trim();
+            const availableHours = document.getElementById('availableHours').value;
+            const office = document.querySelector('input[name="office"]:checked').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!fullName || !phone || !qualification || !location || !availableHours) {
+                alert('الرجاء إكمال كافة الحقول الأساسية قبل الإرسال.');
+                return;
+            }
+
+            // Target Phone Number (Sudan +249)
+            const targetPhone = "249910301298";
+
+            // Format Professional WhatsApp Text
+            let msg = `🌐 *طلب انضمام رسمي - شبكة الممرضين السودانيين الدولية* 🌐\n`;
+            msg += `-------------------------------------------\n\n`;
+            msg += `👤 *الاسم الرباعي:* ${fullName}\n`;
+            msg += `📱 *رقم الواتساب:* ${phone}\n`;
+            msg += `🎓 *المؤهل/التخصص:* ${qualification}\n`;
+            msg += `📍 *محل الإقامة الحالية:* ${location}\n`;
+            msg += `🏛️ *المكتب المرغوب:* ${office}\n`;
+            msg += `⏳ *ساعات التفرغ أسبوعياً:* ${availableHours}\n`;
+
+            if (notes !== "") {
+                msg += `\n💡 *رؤية / مقترحات إضافية:* ${notes}\n`;
+            }
+
+            msg += `\n-------------------------------------------\n`;
+            msg += `🚀 *تم الإرسال عبر البوابة الإلكترونية المحدثة لشبكة SINN*`;
+
+            const encodedMsg = encodeURIComponent(msg);
+            const waUrl = `https://wa.me/${targetPhone}?text=${encodedMsg}`;
+
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
