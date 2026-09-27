@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبكة الممرضين السودانيين الدولية | Sudanese International Nursing Network</title>
+    <!-- Google Fonts: Tajawal & Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #030712;
+            --primary-blue: #0284c7;
+            --cyan-glow: #38bdf8;
+            --emerald-glow: #10b981;
+            --accent-green: #52c41a;
+            --glass-bg: rgba(15, 23, 42, 0.85);
+            --glass-border: rgba(56, 189, 248, 0.25);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(2, 132, 199, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                radial-gradient(circle, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 30px 30px;
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+            position: relative;
+            overflow-x: hidden;
+            will-change: transform;
+        }
+
+        /* Main Container */
+        .cyber-card {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 850px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 28px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 0 40px rgba(2, 132, 199, 0.2);
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        /* Glowing Accent Line */
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cyan-glow), var(--emerald-glow), transparent);
+            animation: scanline 4s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Header Styling */
+        .header {
+            text-align: center;
+            padding: 45px 20px 25px;
+            position: relative;
+        }
+
+        .logo-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed var(--cyan-glow);
+            animation: spin 20s linear infinite;
+            will-change: transform;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #ffffff;
+            padding: 4px;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+            border: 2px solid var(--cyan-glow);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ffffff, var(--cyan-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .header .en-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            color: var(--cyan-glow);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: var(--emerald-glow);
+            font-weight: 600;
+        }
+
+        .status-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--emerald-glow);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--emerald-glow);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        /* Form Area */
+        .form-content {
+            padding: 20px 35px 40px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--cyan-glow);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 650px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-content { padding: 15px 20px 30px; }
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-box.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .input-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+        }
+
+        .input-box label i {
+            color: var(--cyan-glow);
+            margin-left: 6px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--cyan-glow);
+            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        .custom-input-extra {
+            margin-top: 10px;
+            display: none;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        select.input-field {
+            cursor: pointer;
+            color: #f8fafc;
+        }
+
+        select.input-field option {
+            background: #0f172a;
+            color: #fff;
+        }
+
+        /* Selection Cards for Offices & Memberships */
+        .office-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .office-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .office-card i {
+            font-size: 20px;
+            color: var(--cyan-glow);
+            width: 35px;
+            height: 35px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .office-card .office-info h4 {
+            font-size: 13px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .office-card .office-info p {
+            font-size: 11px;
+            color: var(--text-sub);
+        }
+
+        input[type="radio"] { display: none; }
+
+        input[type="radio"]:checked + .office-card {
+            border-color: var(--cyan-glow);
+            background: rgba(2, 132, 199, 0.2);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+        }
+
+        input[type="radio"]:checked + .office-card i {
+            background: var(--cyan-glow);
+            color: #000;
+        }
+
+        /* Ultra Cyber Submit Button */
+        .cyber-btn {
+            position: relative;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #0284c7, #10b981);
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .cyber-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+        }
+
+        .cyber-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: var(--text-sub);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(3, 7, 18, 0.5);
+        }
+
+        .footer-link {
+            color: var(--cyan-glow);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--emerald-glow);
+        }
+
+        .footer span {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Modal Popup Styles - Fixed Position Centered */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #0f172a;
+            border: 1px solid var(--cyan-glow);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+            position: relative;
+            animation: popUp 0.3s ease-out;
+        }
+
+        @keyframes popUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.8);
+        }
+
+        .modal-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--cyan-glow);
+            margin-bottom: 8px;
+        }
+
+        .modal-subtitle {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+        }
+
+        .modal-info-box {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-info-box span {
+            font-size: 13px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .modal-info-box a {
+            color: var(--emerald-glow);
+            text-decoration: none;
+            direction: ltr;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content Card -->
+    <div class="cyber-card">
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-ring"></div>
+                <!-- High Quality SVG Logo -->
+                <svg class="logo-img" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0284c7" />
+                            <stop offset="100%" stop-color="#0f172a" />
+                        </linearGradient>
+                        <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#52c41a" />
+                            <stop offset="100%" stop-color="#15803d" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="#ffffff"/>
+                    <path d="M 240 70 L 290 60 L 330 65 L 340 100 L 350 140 L 320 180 L 280 200 L 250 170 Z" fill="none" stroke="#22c55e" stroke-width="2" opacity="0.6"/>
+                    <path d="M 20 230 L 100 230 L 120 170 L 140 290 L 160 210 L 180 250 L 200 230 L 480 230" fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 180 140 C 100 160 90 280 180 280 C 230 280 220 380 110 380" fill="none" stroke="url(#greenGrad)" stroke-width="32" stroke-linecap="round"/>
+                    <path d="M 200 320 C 180 390 350 420 400 320 C 430 260 380 180 260 200 L 360 330 L 360 160" fill="none" stroke="url(#blueGrad)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M 220 110 L 310 90 L 320 140 C 270 160 250 130 220 110 Z" fill="#ffffff" stroke="#0284c7" stroke-width="4"/>
+                    <path d="M 260 110 L 280 110 M 270 100 L 270 120" stroke="#0284c7" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="390" cy="330" r="22" fill="url(#blueGrad)" stroke="#ffffff" stroke-width="4"/>
+                    <circle cx="390" cy="330" r="12" fill="#e2e8f0"/>
+                </svg>
+            </div>
+            <h1>شبكة الممرضين السودانيين الدولية</h1>
+            <div class="en-title">Sudanese International Nursing Network</div>
+            <div class="status-badge">
+                <span class="pulse-dot"></span>
+                <span>الانطلاقة الهيكلية والمستمرة لعام 2026</span>
+            </div>
+        </div>
+
+        <!-- Form Body -->
+        <div class="form-content">
+            <div class="section-title">
+                <i class="fa-solid fa-id-card-clip"></i>
+                <span>استمارة الانضمام وتحديد المستوى الهيكلي</span>
+            </div>
+
+            <form id="networkForm">
+                <div class="form-grid">
+                    
+                    <!-- Full Name -->
+                    <div class="input-box">
+                        <label for="fullName"><i class="fa-solid fa-user-astronaut"></i> الاسم الرباعي الكامل:</label>
+                        <input type="text" id="fullName" class="input-field" placeholder="أدخل اسمك كما بالوثائق الرسمية" required>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="input-box">
+                        <label for="phone"><i class="fa-brands fa-whatsapp"></i> رقم الهاتف (الواتساب):</label>
+                        <input type="tel" id="phone" class="input-field" placeholder="09xxxxxxxx" required>
+                    </div>
+
+                    <!-- Academic / Professional Qualification -->
+                    <div class="input-box">
+                        <label for="qualification"><i class="fa-solid fa-user-graduate"></i> الدرجة العلمية / التخصص:</label>
+                        <select id="qualification" class="input-field" required>
+                            <option value="" disabled selected>اختر المؤهل العلمي...</option>
+                            <option value="بكالوريوس علوم التمريض">بكالوريوس علوم التمريض</option>
+                            <option value="دبلوم العالي في التمريض">دبلوم العالي في التمريض</option>
+                            <option value="ماجستير التمريض التخصصي">ماجستير التمريض التخصصي</option>
+                            <option value="دكتوراه / استشاري تمريض">دكتوراه / استشاري تمريض</option>
+                            <option value="أخصائي تمريض حالات حرجة / عمليات">أخصائي حالات حرجة / عمليات</option>
+                            <option value="طالب / امتياز تمريض">طالب / امتياز تمريض</option>
+                        </select>
+                    </div>
+
+                    <!-- Residence / Location -->
+                    <div class="input-box">
+                        <label for="location"><i class="fa-solid fa-earth-africa"></i> مكان التواجد والعمل (الدولة - الولاية - المحلية):</label>
+                        <input type="text" id="location" class="input-field" placeholder="مثال: السودان - ولاية نهر النيل - محلية عطبرة" required>
+                    </div>
+
+                    <!-- Membership Type Selection (4 Options including Custom) -->
+                    <div class="input-box full-width">
+                        <label><i class="fa-solid fa-diagram-project"></i> نوع العضوية ومستوى المشاركة المرغوب:</label>
+                        <div class="office-options">
+                            <label>
+                                <input type="radio" name="membershipType" value="عضوية الجمعية العمومية" checked onclick="toggleCustomMembership(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-users"></i>
+                                    <div class="office-info">
+                                        <h4>الجمعية العمومية</h4>
+                                        <p>دعم الأنشطة العامة والمشاركة بالتصويت</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="membershipType" value="عضوية المكتب التنفيذي" onclick="toggleCustomMembership(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-user-gear"></i>
+                                    <div class="office-info">
+                                        <h4>المكتب التنفيذي</h4>
+                                        <p>إدارة وتخطيط المشاريع والبرامج</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="membershipType" value="التنسيق الميداني والمحلي" onclick="toggleCustomMembership(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                    <div class="office-info">
+                                        <h4>التنسيق الميداني والمحلي</h4>
+                                        <p>متابعة العمل المباشر بالمحلية والمستشفيات</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="membershipType" value="CUSTOM" onclick="toggleCustomMembership(true)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <div class="office-info">
+                                        <h4>عضوية أخرى (تحديد يدوي)</h4>
+                                        <p>اكتب مستوى العضوية الذي تفضله بنفسك</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <input type="text" id="customMembershipInput" class="input-field custom-input-extra" placeholder="اكتب نوع العضوية المطلوب هنا...">
+                    </div>
+
+                    <!-- Department / Office Selection (6 Options including Custom) -->
+                    <div class="input-box full-width">
+                        <label><i class="fa-solid fa-sitemap"></i> اختر المكتب الإداري المرغوب للانضمام إليه:</label>
+                        <div class="office-options">
+                            
+                            <label>
+                                <input type="radio" name="office" value="مكتب الإعلام والعلاقات العامة" checked onclick="toggleCustomOffice(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                    <div class="office-info">
+                                        <h4>مكتب الإعلام والعلاقات العامة</h4>
+                                        <p>التغطية والتواصل والتصميم والنشر</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="مكتب البرامج والمشاريع" onclick="toggleCustomOffice(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <div class="office-info">
+                                        <h4>مكتب البرامج والمشاريع</h4>
+                                        <p>تخطيط وتنفيذ الأنشطة والمستشفيات</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="مكتب شؤون العضوية" onclick="toggleCustomOffice(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-users-gear"></i>
+                                    <div class="office-info">
+                                        <h4>مكتب شؤون العضوية</h4>
+                                        <p>سجلات الأعضاء والتنسيق الداخلي</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="مكتب التقييم والمتابعة" onclick="toggleCustomOffice(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                                    <div class="office-info">
+                                        <h4>مكتب التقييم والمتابعة</h4>
+                                        <p>ضبط الجودة ومراقبة سير الأداء</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="مكتب الموارد البشرية" onclick="toggleCustomOffice(false)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-people-capacity"></i>
+                                    <div class="office-info">
+                                        <h4>مكتب الموارد البشرية</h4>
+                                        <p>توزيع وتأهيل وتدريب الكوادر</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="office" value="CUSTOM" onclick="toggleCustomOffice(true)">
+                                <div class="office-card">
+                                    <i class="fa-solid fa-folder-plus"></i>
+                                    <div class="office-info">
+                                        <h4>مكتب آخر (تحديد يدوي)</h4>
+                                        <p>اكتب اسم المكتب الإداري بنفسك</p>
+                                    </div>
+                                </div>
+                            </label>
+
+                        </div>
+                        <input type="text" id="customOfficeInput" class="input-field custom-input-extra" placeholder="اكتب اسم المكتب الإداري المطلوب...">
+                    </div>
+
+                    <!-- Skills & Extras -->
+                    <div class="input-box">
+                        <label for="skills"><i class="fa-solid fa-wand-magic-sparkles"></i> المهارات التمريضية والمنظماتية:</label>
+                        <select id="skills" class="input-field" onchange="checkCustomSkill(this)">
+                            <option value="لا توجد مهارات إضافية محددة" selected>اختر المهارة الأبرز لديك...</option>
+                            <option value="إدارة الأزمات والاستجابة الطارئة">إدارة الأزمات والاستجابة الطارئة</option>
+                            <option value="التثقيف والتوعية الصحية الميدانية">التثقيف والتوعية الصحية الميدانية</option>
+                            <option value="كتابة التقارير والمشاريع الطبية">كتابة التقارير والمشاريع الطبية</option>
+                            <option value="القيادة والتنسيق الميداني بالمستشفيات">القيادة والتنسيق الميداني بالمستشفيات</option>
+                            <option value="التدريب والإشراف الأكاديمي والسريري">التدريب والإشراف الأكاديمي والسريري</option>
+                            <option value="التصميم والتغطية الإعلامية الصحية">التصميم والتغطية الإعلامية الصحية</option>
+                            <option value="CUSTOM">كتابة مهارة أخرى...</option>
+                        </select>
+                        <input type="text" id="customSkillInput" class="input-field custom-input-extra" placeholder="اكتب مهاراتك الإضافية بالتفصيل...">
+                    </div>
+
+                    <!-- Weekly Dedicated Hours -->
+                    <div class="input-box">
+                        <label for="availableHours"><i class="fa-solid fa-clock-rotate-left"></i> ساعات التفرغ الأسبوعية:</label>
+                        <select id="availableHours" class="input-field" required onchange="checkCustomHours(this)">
+                            <option value="" disabled selected>حدد الساعات المتاحة...</option>
+                            <option value="من 1 إلى 3 ساعات أسبوعياً">من 1 إلى 3 ساعات أسبوعياً</option>
+                            <option value="من 4 إلى 7 ساعات أسبوعياً">من 4 إلى 7 ساعات أاعات أسبوعياً</option>
+                            <option value="أكثر من 8 ساعات (تفرغ كامل/فعال)">أكثر من 8 ساعات (تفرغ كامل/فعال)</option>
+                            <option value="CUSTOM">كتابة ساعات التفرغ بنفسك...</option>
+                        </select>
+                        <input type="text" id="customHoursInput" class="input-field custom-input-extra" placeholder="اكتب عدد ساعات التفرغ المناسبة لك...">
+                    </div>
+
+                    <!-- Additional Vision / Admin Contribution -->
+                    <div class="input-box full-width">
+                        <label for="notes"><i class="fa-solid fa-lightbulb"></i> الرؤية والمساهمة الإدارية لتطوير المنظمة:</label>
+                        <textarea id="notes" class="input-field" rows="4" placeholder="كيف ترغب في المشاركة كإداري؟ ما هي أهدافك ورؤيتك لتحسين أداء الشبكة وتطوير العمل الميداني والمنظماتي بالمحلية؟"></textarea>
+                    </div>
+
+                </div>
+
+                <!-- Submit Button -->
+                <button type="button" onclick="submitToWhatsApp()" class="cyber-btn">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i>
+                    <span>إرسال البيانات فوراً إلى إدارة الشبكة</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer with Interactive Modal Link -->
+        <div class="footer">
+            <span>SINN</span> &copy; 2026 | <span class="footer-link" onclick="openDeveloperModal(event)">تم التطوير بواسطة شبكة الممرضين السودانيين الدولية</span> - كافة الحقوق محفوظة
+        </div>
+    </div>
+
+    <!-- Developer/Rights Pop-up Modal (النافذة المنبثقة) -->
+    <div id="developerModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeDeveloperModal(event)"><i class="fa-solid fa-xmark"></i></button>
+            
+            <svg class="modal-logo" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" rx="100" fill="#ffffff"/>
+                <path d="M 20 230 L 100 230 L 120 170 L 140 290 L 160 210 L 180 250 L 200 230 L 480 230" fill="none" stroke="#22c55e" stroke-width="8"/>
+                <path d="M 180 140 C 100 160 90 280 180 280 C 230 280 220 380 110 380" fill="none" stroke="#52c41a" stroke-width="32"/>
+                <path d="M 200 320 C 180 390 350 420 400 320 C 430 260 380 180 260 200 L 360 330 L 360 160" fill="none" stroke="#0284c7" stroke-width="22"/>
+            </svg>
+
+            <div class="modal-title">شبكة الممرضين السودانيين الدولية</div>
+            <div class="modal-subtitle">النظام الرقمي المطور لإدارة العضوية والهيكلة</div>
+
+            <div class="modal-info-box">
+                <span><i class="fa-solid fa-phone" style="color: var(--cyan-glow); margin-left: 5px;"></i> رقم الاتصال الهاتفي:</span>
+                <a href="tel:0914159182">0914159182</a>
+            </div>
+
+            <div class="modal-info-box">
+                <span><i class="fa-brands fa-whatsapp" style="color: var(--emerald-glow); margin-left: 5px;"></i> حساب الواتساب الرسمي:</span>
+                <a href="https://wa.me/249910301298" target="_blank">0910301298</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Handling Dynamic Inputs & WhatsApp Transmission -->
+    <script>
+        // Display Extra Field Handlers
+        function toggleCustomMembership(show) {
+            const input = document.getElementById('customMembershipInput');
+            input.style.display = show ? 'block' : 'none';
+            if (show) input.focus();
+        }
+
+        function toggleCustomOffice(show) {
+            const input = document.getElementById('customOfficeInput');
+            input.style.display = show ? 'block' : 'none';
+            if (show) input.focus();
+        }
+
+        function checkCustomSkill(select) {
+            const input = document.getElementById('customSkillInput');
+            if (select.value === 'CUSTOM') {
+                input.style.display = 'block';
+                input.focus();
+            } else {
+                input.style.display = 'none';
+            }
+        }
+
+        function checkCustomHours(select) {
+            const input = document.getElementById('customHoursInput');
+            if (select.value === 'CUSTOM') {
+                input.style.display = 'block';
+                input.focus();
+            } else {
+                input.style.display = 'none';
+            }
+        }
+
+        // Modal Controls without scrolling page
+        function openDeveloperModal(e) {
+            if(e) e.preventDefault();
+            document.getElementById('developerModal').style.display = 'flex';
+        }
+
+        function closeDeveloperModal(e) {
+            if(e) e.preventDefault();
+            document.getElementById('developerModal').style.display = 'none';
+        }
+
+        // WhatsApp Submission
+        function submitToWhatsApp() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const qualification = document.getElementById('qualification').value;
+            const location = document.getElementById('location').value.trim();
+            
+            // Resolve Membership
+            let membershipType = document.querySelector('input[name="membershipType"]:checked').value;
+            if (membershipType === 'CUSTOM') {
+                membershipType = document.getElementById('customMembershipInput').value.trim() || 'عضوية مخصصة (غير محددة)';
+            }
+
+            // Resolve Office
+            let office = document.querySelector('input[name="office"]:checked').value;
+            if (office === 'CUSTOM') {
+                office = document.getElementById('customOfficeInput').value.trim() || 'مكتب إداري مخصص';
+            }
+
+            // Resolve Skills
+            let skills = document.getElementById('skills').value;
+            if (skills === 'CUSTOM') {
+                skills = document.getElementById('customSkillInput').value.trim() || 'مهارات خاصة ومحددة';
+            }
+
+            // Resolve Hours
+            let availableHours = document.getElementById('availableHours').value;
+            if (availableHours === 'CUSTOM') {
+                availableHours = document.getElementById('customHoursInput').value.trim() || 'تفرغ مرن وحسب الحاجة';
+            }
+
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!fullName || !phone || !qualification || !location || !availableHours) {
+                alert('الرجاء إكمال كافة الحقول الأساسية قبل الإرسال.');
+                return;
+            }
+
+            const targetPhone = "249910301298";
+
+            let msg = `🌐 *طلب انضمام رسمي - شبكة الممرضين السودانيين الدولية* 🌐\n`;
+            msg += `-------------------------------------------\n\n`;
+            msg += `👤 *الاسم الرباعي:* ${fullName}\n`;
+            msg += `📱 *رقم الواتساب:* ${phone}\n`;
+            msg += `🎓 *المؤهل/التخصص:* ${qualification}\n`;
+            msg += `📍 *مكان العمل والتواجد:* ${location}\n`;
+            msg += `🎖️ *نوع العضوية:* ${membershipType}\n`;
+            msg += `🏛️ *المكتب الإداري:* ${office}\n`;
+            msg += `✨ *المهارات المنظماتية والتمريضية:* ${skills}\n`;
+            msg += `⏳ *ساعات التفرغ أسبوعياً:* ${availableHours}\n`;
+
+            if (notes !== "") {
+                msg += `\n💡 *الرؤية والمساهمة الإدارية:* ${notes}\n`;
+            }
+
+            msg += `\n-------------------------------------------\n`;
+            msg += `🚀 *تم الإرسال عبر البوابة الإلكترونية المحدثة لشبكة SINN*`;
+
+            const encodedMsg = encodeURIComponent(msg);
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            let waUrl = isMobile 
+                ? `whatsapp://send?phone=${targetPhone}&text=${encodedMsg}`
+                : `https://web.whatsapp.com/send?phone=${targetPhone}&text=${encodedMsg}`;
+
+            window.location.href = waUrl;
+        }
+    </script>
+</body>
+</html>
