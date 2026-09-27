@@ -526,7 +526,7 @@
         </div>
     </div>
 
-    <!-- Light Script for WhatsApp Logic -->
+    <!-- Enhanced Guaranteed WhatsApp Direct Script -->
     <script>
         function submitToWhatsApp() {
             const fullName = document.getElementById('fullName').value.trim();
@@ -542,10 +542,10 @@
                 return;
             }
 
-            // Target Phone Number (Sudan +249)
+            // Target Phone Number in Sudan International Format (+249)
             const targetPhone = "249910301298";
 
-            // Format WhatsApp Message
+            // Format WhatsApp Message Body
             let msg = `🌐 *طلب انضمام رسمي - شبكة الممرضين السودانيين الدولية* 🌐\n`;
             msg += `-------------------------------------------\n\n`;
             msg += `👤 *الاسم الرباعي:* ${fullName}\n`;
@@ -563,9 +563,21 @@
             msg += `🚀 *تم الإرسال عبر البوابة الإلكترونية المحدثة لشبكة SINN*`;
 
             const encodedMsg = encodeURIComponent(msg);
-            const waUrl = `https://wa.me/${targetPhone}?text=${encodedMsg}`;
 
-            window.open(waUrl, '_blank');
+            // Universal WhatsApp URL Structure (Works smoothly on both Mobile App & Desktop Web)
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            let waUrl;
+            if (isMobile) {
+                // Direct Deep Link Protocol for Mobile Apps
+                waUrl = `whatsapp://send?phone=${targetPhone}&text=${encodedMsg}`;
+            } else {
+                // Standard Web Link for PC/Laptop Browser
+                waUrl = `https://web.whatsapp.com/send?phone=${targetPhone}&text=${encodedMsg}`;
+            }
+
+            // Fallback Redirection
+            window.location.href = waUrl;
         }
     </script>
 </body>
